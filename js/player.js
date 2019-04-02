@@ -59,6 +59,7 @@ class Player {
                 if (--this.frame < 0) {this.frame = 2;}
             }
         }.bind(this);
+
     }
     
 }

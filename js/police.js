@@ -1,5 +1,5 @@
 class Police {
-    constructor(w, h, ctx, board, blockSize){
+    constructor(w, h, ctx, board, blockSize, playerPosX, playerPosY){
         this.canvasW = w;
         this.canvasH = h;
         this.ctx = ctx;
@@ -10,9 +10,9 @@ class Police {
         this.boardW = board.length*25;
         this.blockSize = blockSize;
 
-        this.pathStart = [800, 100];
-        this.pathEnd = [200,200];
-        this.currentPath = this.findPath(this.canvasH, this.board, this.pathStart,this.pathEnd);
+        this.playerPosX = playerPosX;
+        this.playerPosY = playerPosY;
+
         this.i = 0;
     }
 
@@ -24,6 +24,10 @@ class Police {
     }
 
     move() {
+
+        this.pathStart = [100, 100];
+        this.pathEnd = [this.playerPosX, this.playerPosY];
+        this.currentPath = this.findPath(this.canvasH, this.board, this.pathStart,this.pathEnd);
 
         if(this.currentPath[this.i] !== undefined) {
             this.posX = this.currentPath[this.i][0];
@@ -43,10 +47,10 @@ class Police {
         this.sqrt = Math.sqrt;
 
         this.maxWalkableTileNum = 0;
+        this.world = board;
         this.worldWidth = board[0].length*25;
         this.worldHeight = board.length*25;
         this.worldSize = this.worldWidth * this.worldHeight;
-        console.log(this.worldSize);
         
 
         this.distanceFunction = ManhattanDistance;
@@ -122,11 +126,14 @@ class Police {
 
         function canWalkHere(x, y, a)
         {   
-            // a.prova = parseInt(x/30);
-            // a.prova2 = parseInt(y/30);
-            // console.log(a.prova);
-            // console.log(board[a.prova2][a.prova]);
-            return (board[parseInt(y/30)][parseInt(x/30)] != 1);
+            // return (a.world[parseInt(y/25)][parseInt(x/25)] != 1);
+            // // return (board[parseInt(y/30)][parseInt(x/30)] != 1);
+            
+            return (a.world[parseInt(y/25)][parseInt(x/25)] !== 1);
+            //console.log(a.world[parseInt(y/25)][parseInt(x/25)]);
+            
+           
+
         }
 
         function Node(Parent, Point, a)

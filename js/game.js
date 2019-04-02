@@ -32,7 +32,7 @@ var Game = {
     reset: function() {
         this.labyrinth = new Labyrinth(this.canvas.width, this.canvas.height, this.ctx);
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys, this.labyrinth.board, this.labyrinth.blockSize);
-        this.police = new Police(this.canvas.width, this.canvas.height, this.ctx, this.labyrinth.board, this.labyrinth.blockSize);
+        this.police = new Police(this.canvas.width, this.canvas.height, this.ctx, this.labyrinth.board, this.labyrinth.blockSize, this.player.posX, this.player.posY);
     },
 
     clear: function() {

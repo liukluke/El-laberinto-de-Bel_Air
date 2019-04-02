@@ -23,8 +23,7 @@ class Player {
   
     draw() {
         this.ctx.save();
-        this.ctx.clearRect(0, 0, this.canvasW, this.canvasW);
-        this.ctx.scale(1, 1);
+        // this.ctx.scale(1, 1);
         if (this.sense === 1) {
             this.ctx.drawImage(this.will, this.frame * this.characterFrameW, 0, 360, 570, this.posX, this.posY, 25, 25);
         } else {
@@ -34,7 +33,7 @@ class Player {
     }
          
     canMove(posX,posY) {
-        return (posY >= 0) && (posX >= 0) && (this.board[posY/25][posX/25] != 1); 
+        return (posY >= 0) && (posX >= 0) && (posY <= this.canvasH) && (posX < this.canvasW) && (this.board[posY/25][posX/25] != 1); 
     }
 
     move() {    

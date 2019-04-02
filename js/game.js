@@ -32,6 +32,7 @@ var Game = {
     reset: function() {
         this.labyrinth = new Labyrinth(this.canvas.width, this.canvas.height, this.ctx);
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys, this.labyrinth.board, this.labyrinth.blockSize);
+        this.police = new Police(this.canvas.width, this.canvas.height, this.ctx, this.labyrinth.board, this.labyrinth.blockSize);
     },
 
     clear: function() {
@@ -39,12 +40,15 @@ var Game = {
     },
 
     drawAll: function() {
+        this.ctx.clearRect(0, 0, this.canvasW, this.canvasW);
         this.player.draw();
+        this.police.draw();
         this.labyrinth.draw();
     }, 
 
     moveAll: function() {
         this.player.move();
+        this.police.move();
     }
 
 };

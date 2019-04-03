@@ -19,20 +19,20 @@ var Game = {
     },
 
     start: function(){
-
         this.reset();
-
         this.interval = setInterval(() => {
-            this.clear();
-            this.moveAll();
+            this.clear(); 
+            // this.moveAll();
             this.drawAll();
-        },10);    
+            this.police.move(this.player.posX, this.player.posY, this.interval);
+            this.player.move();
+        },10);  
     },
 
     reset: function() {
         this.labyrinth = new Labyrinth(this.canvas.width, this.canvas.height, this.ctx);
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys, this.labyrinth.board, this.labyrinth.blockSize);
-        this.police = new Police(this.canvas.width, this.canvas.height, this.ctx, this.labyrinth.board, this.labyrinth.blockSize, this.player.posX, this.player.posY);
+        this.police = new Police(this.canvas.width, this.canvas.height, this.ctx, this.labyrinth.board, this.labyrinth.blockSize);
     },
 
     clear: function() {
@@ -47,8 +47,7 @@ var Game = {
     }, 
 
     moveAll: function() {
-        this.player.move();
-        this.police.move();
+
     }
 
 };

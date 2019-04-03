@@ -1,17 +1,14 @@
 class Police {
-    constructor(w, h, ctx, board, blockSize, playerPosX, playerPosY){
+    constructor(w, h, ctx, board, blockSize){
         this.canvasW = w;
         this.canvasH = h;
         this.ctx = ctx;
-
-        this.posX = this.canvasW-25;
-        this.posY = this.canvasH-25;
-        this.board = board;
-        this.boardW = board.length*25;
         this.blockSize = blockSize;
 
-        this.playerPosX = playerPosX;
-        this.playerPosY = playerPosY;
+        this.posX = this.canvasW - this.blockSize;
+        this.posY = this.canvasH - this.blockSize;
+        this.board = board;
+        this.boardW = board.length * this.blockSize;
 
         this.i = 0;
     }
@@ -19,37 +16,55 @@ class Police {
     draw() { 
         this.ctx.save();
         this.ctx.fillStyle = "blue";
-        this.ctx.fillRect(this.posX, this.posY, 25, 25);     
+        this.ctx.fillRect(this.posX, this.posY, this.blockSize, this.blockSize);     
         this.ctx.restore();
     }
 
-    move() {
+    gameOver() {
+        document.getElementById('canvas').classList.toggle("display");
+        document.getElementById('background').classList.remove("container");
+        document.getElementById('background').classList.add("game-over"); 
+    }
 
-        this.pathStart = [100, 100];
-        this.pathEnd = [this.playerPosX, this.playerPosY];
-        this.currentPath = this.findPath(this.canvasH, this.board, this.pathStart,this.pathEnd);
+    move(playerPosX,playerPosY, interval) {
 
-        if(this.currentPath[this.i] !== undefined) {
-            this.posX = this.currentPath[this.i][0];
-            this.i++;
-        }
-        if(this.currentPath[this.i] !== undefined) {
-            this.posY = this.currentPath[this.i][1];
-        }         
+        
+        this.pathStart = [200, 200];
+        this.pathEnd = [playerPosX, playerPosY];
+
+        // console.log(this.pathEnd);
+
+        if(this.posX == this.pathEnd[0] && this.posY == this.pathEnd[1]){
+            this.gameOver();
+            return clearInterval(interval);
+
+        } else {
+        
+           this.currentPath = this.findPath(this.board, this.pathStart,this.pathEnd, this.blockSize);
+            
+           if(this.currentPath[this.i] !== undefined) {
+               this.posX = this.currentPath[this.i][0];
+               this.i ++;
+           }
+           if(this.currentPath[this.i] !== undefined) {
+               this.posY = this.currentPath[this.i][1];
+           }  
+
+        }       
 
     }       
 
-
-    findPath(canvasH, board, pathStart, pathEnd) {
+    findPath(board, pathStart, pathEnd, blockSize) {
         this.abs = Math.abs;
         this.max = Math.max;
         this.pow = Math.pow;
         this.sqrt = Math.sqrt;
 
+        this.blockSize = blockSize;
         this.maxWalkableTileNum = 0;
         this.world = board;
-        this.worldWidth = board[0].length*25;
-        this.worldHeight = board.length*25;
+        this.worldWidth = board[0].length * this.blockSize;
+        this.worldHeight = board.length * this.blockSize;
         this.worldSize = this.worldWidth * this.worldHeight;
         
 
@@ -125,15 +140,8 @@ class Police {
         // }
 
         function canWalkHere(x, y, a)
-        {   
-            // return (a.world[parseInt(y/25)][parseInt(x/25)] != 1);
-            // // return (board[parseInt(y/30)][parseInt(x/30)] != 1);
-            
-            return (a.world[parseInt(y/25)][parseInt(x/25)] !== 1);
-            //console.log(a.world[parseInt(y/25)][parseInt(x/25)]);
-            
-           
-
+        {     
+            return (a.world[parseInt(y/a.blockSize)][parseInt(x/a.blockSize)] !== 1);
         }
 
         function Node(Parent, Point, a)

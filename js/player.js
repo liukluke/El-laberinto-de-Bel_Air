@@ -33,7 +33,7 @@ class Player {
     }
          
     canMove(posX,posY) {
-        return (posY >= 0) && (posX >= 0) && (posY <= this.canvasH) && (posX < this.canvasW) && (this.board[posY/25][posX/25] != 1); 
+        return (posY >= 0) && (posX >= 0) && (posY <= this.canvasH) && (posX < this.canvasW) && (this.board[posY/this.blockSize][posX/this.blockSize] != 1); 
     }
 
     move() {    

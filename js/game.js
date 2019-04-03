@@ -2,6 +2,7 @@ var Game = {
     canvas: undefined,
     ctx: undefined,
     scoreBoard: undefined,
+    counter: 0,
     keys: {
       TOP_KEY: 38,
       DOWN_KEY: 40,
@@ -21,11 +22,17 @@ var Game = {
     start: function(){
         this.reset();
         this.interval = setInterval(() => {
+            this.counter++
             this.clear(); 
             // this.moveAll();
             this.drawAll();
-            this.police.move(this.player.posX, this.player.posY, this.interval);
+            if(this.counter % 100 === 0){
+                console.log("calculando")
+                this.police.direction(this.player.posX, this.player.posY);
+            }
+            this.police.move(this.interval, this.player.posX, this.player.posY);
             this.player.move();
+            
         },10);  
     },
 

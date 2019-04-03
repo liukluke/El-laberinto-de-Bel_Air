@@ -9,7 +9,7 @@ class Player {
         this.blockSize = blockSize;
 
         this.posX = 0;
-        this.posY = 0;
+        this.posY = this.canvasH/2 - blockSize;
         this.will = new Image();
         this.willFlip = new Image();
         this.will.src = "./images/willyPlayer.png";
@@ -25,9 +25,9 @@ class Player {
         this.ctx.save();
         // this.ctx.scale(1, 1);
         if (this.sense === 1) {
-            this.ctx.drawImage(this.will, this.frame * this.characterFrameW, 0, 360, 570, this.posX, this.posY, 25, 25);
+            this.ctx.drawImage(this.will, this.frame * this.characterFrameW, 0, 360, 570, this.posX, this.posY, this.blockSize, this.blockSize);
         } else {
-            this.ctx.drawImage(this.willFlip, this.frame * this.characterFrameW, 0, 360, 570, this.posX, this.posY, 25, 25);
+            this.ctx.drawImage(this.willFlip, this.frame * this.characterFrameW, 0, 360, 570, this.posX, this.posY, this.blockSize, this.blockSize);
         }
         this.ctx.restore();
     }

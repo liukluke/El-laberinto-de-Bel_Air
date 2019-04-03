@@ -5,8 +5,8 @@ class Police {
         this.ctx = ctx;
         this.blockSize = blockSize;
 
-        this.posX = this.canvasW - this.blockSize;
-        this.posY = this.canvasH - this.blockSize;
+        // this.posX = this.canvasW - this.blockSize;
+        // this.posY = this.canvasH - this.blockSize;
         this.board = board;
         this.boardW = board.length * this.blockSize;
 
@@ -26,30 +26,35 @@ class Police {
         document.getElementById('background').classList.add("game-over"); 
     }
 
-    move(playerPosX,playerPosY, interval) {
+    direction(playerPosX, playerPosY) {
 
-        
-        this.pathStart = [200, 200];
-        this.pathEnd = [playerPosX, playerPosY];
+        this.playerPosX = playerPosX;
+        this.playerPosY = playerPosY;
 
-        // console.log(this.pathEnd);
+        this.pathStart = [this.blockSize, this.canvasH - this.blockSize];
+        this.pathEnd = [this.playerPosX,this.playerPosY];
+    
+        this.currentPath = this.findPath(this.board, this.pathStart,this.pathEnd, this.blockSize);
+        console.log(this.currentPath.length)
+ 
+    }
 
-        if(this.posX == this.pathEnd[0] && this.posY == this.pathEnd[1]){
+    move(interval, playerPosX, playerPosY) {
+
+        // this.pathStart = [25,50];
+        // this.pathEnd = [800, 400];
+
+        if(this.posX == playerPosX && this.posY == playerPosY){
             this.gameOver();
             return clearInterval(interval);
 
         } else {
-        
-           this.currentPath = this.findPath(this.board, this.pathStart,this.pathEnd, this.blockSize);
             
            if(this.currentPath[this.i] !== undefined) {
                this.posX = this.currentPath[this.i][0];
+               this.posY = this.currentPath[this.i][1];
                this.i ++;
            }
-           if(this.currentPath[this.i] !== undefined) {
-               this.posY = this.currentPath[this.i][1];
-           }  
-
         }       
 
     }       

@@ -7,10 +7,12 @@
     <title>El laberinto de Bel-Air</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
     <link rel="stylesheet" href="./css/styles.css">
+    <script type="text/javascript" src="./js/background.js"></script> 
     <script type="text/javascript" src="./js/police.js"></script> 
     <script type="text/javascript" src="./js/labyrinth.js"></script> 
     <script type="text/javascript" src="./js/player.js"></script> 
     <script type="text/javascript" src="./js/game.js"></script> 
+    <script type="text/javascript" src="./js/canvas2.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
     
 </head>
@@ -20,7 +22,9 @@
             <img src="./images/logo.png" alt="Logo prince of Bel-Air">
             <button class="btn btn-play" id="start-button">play the game!</button>
         </div>
-        <canvas style="border: 1px solid red"class="display" id="canvas" width="900" height="500"></canvas> 
+        <canvas class="display display1" id="canvas" width="900" height="500"></canvas>
+        <canvas class="display2 display" id="canvas2"></canvas>
     </div>
+
 </body>
 </html>

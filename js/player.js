@@ -31,12 +31,19 @@ class Player {
         }
         this.ctx.restore();
     }
+
+    winner() {
+        document.getElementById('canvas').classList.toggle("display");
+        document.getElementById('canvas2').classList.toggle("display");
+        document.getElementById('background').classList.remove("container");
+        document.getElementById('background').classList.add("winner");
+    }
          
     canMove(posX,posY) {
         return (posY >= 0) && (posX >= 0) && (posY <= this.canvasH) && (posX < this.canvasW) && (this.board[posY/this.blockSize][posX/this.blockSize] != 1); 
     }
 
-    move() {    
+    move(interval) {    
         document.onkeydown = function (e) {
             if(e.keyCode == this.keys.LEFT_KEY && this.canMove(this.posX-this.blockSize, this.posY)) {
                 this.sense = -1;
@@ -57,6 +64,10 @@ class Player {
                 this.sense = -1;
                 this.posY += this.blockSize;
                 if (--this.frame < 0) {this.frame = 2;}
+            }
+            if (this.posX >= this.canvasW - this.blockSize*2) {
+                this.winner();
+                return clearInterval(interval);
             }
         }.bind(this);
 

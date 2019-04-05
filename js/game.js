@@ -30,11 +30,8 @@ var Game = {
             // this.moveAll();
             this.drawAll();
             if(this.counter % 25 === 0){
-                console.log("calculando");
-                // this.police.direction(this.player.posX, this.player.posY);
                 this.police.move(this.audioSong, this.interval, this.player.posX, this.player.posY);
             }
-            // this.police.direction(this.player.posX, this.player.posY);
             this.player.move(this.audioSong, this.interval);
     
             

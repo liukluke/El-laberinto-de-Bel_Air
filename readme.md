@@ -2,6 +2,8 @@
 
 Juego hecho con html5 canvas.
 
+https://liukluke.github.io/El-laberinto-de-Bel_Air/
+
 ## Propósito del juego
 
 Ayuda a Will a alcanzar Bel-Air tratando de evitar al policía.

@@ -102,3 +102,8 @@
 .display1{
     z-index: 99999;
 }
+
+.btn-restart {
+    margin-bottom:1%; 
+    align-self: flex-end;
+}

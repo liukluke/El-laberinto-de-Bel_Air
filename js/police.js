@@ -39,7 +39,7 @@ class Police {
         document.getElementById('canvas').classList.toggle("display");
         document.getElementById('canvas2').classList.toggle("display");
         document.getElementById('background').classList.remove("container");
-        document.getElementById('background').classList.add("game-over"); 
+        document.getElementById('background').classList.add("game-over");    
     }
 
     canMove(posX,posY) {
@@ -81,9 +81,10 @@ class Police {
         // else {this.right()}
     }
     
-    move(interval, playerPosX, playerPosY) {
+    move(audio, interval, playerPosX, playerPosY) {
 
         if(this.posX == playerPosX && this.posY == playerPosY){
+            audio.pause();
             this.gameOver();
             return clearInterval(interval);
 

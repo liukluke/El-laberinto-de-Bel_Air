@@ -15,24 +15,28 @@ var Game = {
         
         /** @type {CanvasRenderingContext2D} */
         this.ctx = canvas.getContext("2d");
-
+        
+        this.audioSong = new Audio("audio/song.mp3");
+        // this.audioSong.onload = this.start()
         this.start();
     },
 
     start: function(){
         this.reset();
+        this.audioSong.play();
         this.interval = setInterval(() => {
-            this.counter++
+            this.counter++;
             this.clear(); 
             // this.moveAll();
             this.drawAll();
             if(this.counter % 25 === 0){
-                console.log("calculando")
+                console.log("calculando");
                 // this.police.direction(this.player.posX, this.player.posY);
-                this.police.move(this.interval, this.player.posX, this.player.posY);
+                this.police.move(this.audioSong, this.interval, this.player.posX, this.player.posY);
             }
             // this.police.direction(this.player.posX, this.player.posY);
-            this.player.move(this.interval);
+            this.player.move(this.audioSong, this.interval);
+    
             
         },10);  
     },
@@ -54,6 +58,7 @@ var Game = {
         this.player.draw();
         this.police.draw();
         this.labyrinth.draw();
+
     }, 
 
     moveAll: function() {

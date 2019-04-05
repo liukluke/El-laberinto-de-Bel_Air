@@ -43,7 +43,12 @@ class Player {
         return (posY >= 0) && (posX >= 0) && (posY <= this.canvasH) && (posX < this.canvasW) && (this.board[posY/this.blockSize][posX/this.blockSize] != 1); 
     }
 
-    move(interval) {    
+    move(audio, interval) { 
+        if (this.posX >= this.canvasW - this.blockSize*2) {
+            audio.pause();
+            this.winner();
+            return clearInterval(interval);
+        } else {   
         document.onkeydown = function (e) {
             if(e.keyCode == this.keys.LEFT_KEY && this.canMove(this.posX-this.blockSize, this.posY)) {
                 this.sense = -1;
@@ -65,12 +70,8 @@ class Player {
                 this.posY += this.blockSize;
                 if (--this.frame < 0) {this.frame = 2;}
             }
-            if (this.posX >= this.canvasW - this.blockSize*2) {
-                this.winner();
-                return clearInterval(interval);
-            }
         }.bind(this);
-
+        }
     }
     
 }
